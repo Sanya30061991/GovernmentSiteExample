@@ -1,4 +1,4 @@
-from django.forms import ModelForm, TextInput, Textarea
+from django.forms import ModelForm, TextInput, Textarea, DateInput, Select
 from django.contrib.auth.models import User
 from .models import Citizen
 
@@ -7,30 +7,51 @@ class CitReg(ModelForm):
         model = Citizen
         fields = [
             'first_name',
+            'last_name',
+            'birth_day',
+            'gender',
             'email',
-            'password',
-            '',
-
+            'password'
             ]
         widgets = {
-            'first_name' : TextInput(attrs = {
+            'first_name' : TextInput(attrs={
+                'class':"input--style-1",
                 'type':"text",
-                'class':"form-control",
-                'placeholder':"Name"
+                'placeholder':"NAME",
+                'name':"name"
             }),
-            'email' : TextInput(attrs = {
-                'type':"email",
-                'class':"form-control",
-                'placeholder':"Email Address"
+            'last_name' : TextInput(attrs={
+                'class':"input--style-1",
+                'type':"text",
+                'placeholder':"SURNAME",
+                'name':"surname"
             }),
-            'password' : TextInput(attrs = {
-                'type':"password",
-                'class':"form-control",
-                'placeholder':"Password"
+            'birth_day' : DateInput(attrs={
+                'class':"input--style-1 js-datepicker",
+                'type':"text",
+                'placeholder':"BIRTHDATE",
+                'name':"birthday",
             }),
-            'last_name' : TextInput(attrs = {
-                'type':"password",
-                'class':"form-control",
-                'placeholder':"Confirm Password"
-            })
+            'gender' : Select(attrs={
+                'disabled':"disabled",
+                'selected':"selected",
+                'name':'gender'
+            }, choices=(
+                'Male',
+                'Female',
+                'Other'
+                )
+                ),
+            'email' : TextInput(attrs={
+            'class':"input--style-1",
+            'type':"text",
+            'placeholder':"EMAIL",
+            'name':"email"
+            }),
+            'password' : TextInput(attrs={
+            'class':"input--style-1",
+            'type':"text",
+            'placeholder':"PASSWORD",
+            'name':"password"
+            }),
         }
