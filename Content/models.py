@@ -17,6 +17,8 @@ class Citizen(models.Model):
         verbose_name = 'Citizen'
         verbose_name_plural = 'Citizens'
 
+    def __str__(self):
+        return self.first_name + " " + self.last_name + " " + f"({self.department})"
 
 
 
