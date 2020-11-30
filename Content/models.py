@@ -12,13 +12,14 @@ class Citizen(models.Model):
     bday = models.DateField(name="birth_day", auto_now=False)
     gender = models.CharField(name="gender", default="Other", max_length=15, choices=[('Male','Male'), ('Female','Female'), ('Other','Other')])
     age = models.IntegerField(name="age", default=0)
+    rank = models.CharField(name="rank", default="", max_length=100)
 
     class Meta:
         verbose_name = 'Citizen'
         verbose_name_plural = 'Citizens'
 
     def __str__(self):
-        return self.first_name + " " + self.last_name + " " + f"({self.department})"
+        return self.first_name + " " + self.last_name + " " + f"({self.department})" + f"[{self.rank}]"
 
 
 
