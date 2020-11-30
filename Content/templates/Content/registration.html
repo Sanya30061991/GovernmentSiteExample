@@ -38,7 +38,7 @@
                     <form method="POST">
                         {% csrf_token %}
                         <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="NAME" name="name">
+                            {% form.first_name %}
                         </div>
                         <div class="row row-space">
                             <div class="col-2">

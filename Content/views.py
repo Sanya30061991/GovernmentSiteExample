@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+from .forms import CitReg
 # Create your views here.
 
 
@@ -13,4 +14,7 @@ def start(request):
     return render(request, 'Content/start.html')
 
 def reg(request):
-    return render(request, 'Content/registration.html')
+    context = {
+        'form':CitReg()
+    }
+    return render(request, 'Content/registration.html', context)

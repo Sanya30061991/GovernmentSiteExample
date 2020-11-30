@@ -36,11 +36,12 @@ class CitReg(ModelForm):
                 'disabled':"disabled",
                 'selected':"selected",
                 'name':'gender'
-            }, choices=(
-                'Male',
-                'Female',
-                'Other'
-                )
+            }, 
+                choices=(
+                    'Male',
+                    'Female',
+                    'Other'
+                    )
                 ),
             'email' : TextInput(attrs={
             'class':"input--style-1",
