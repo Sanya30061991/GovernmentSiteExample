@@ -1,5 +1,4 @@
 from django.forms import ModelForm, TextInput, Textarea, DateInput, Select
-from django.contrib.auth.models import User
 from .models import Citizen
 
 class CitReg(ModelForm):
@@ -33,9 +32,7 @@ class CitReg(ModelForm):
                 'name':"birthday",
             }),
             'gender' : Select(attrs={
-                'disabled':"disabled",
-                'selected':"selected",
-                'name':'gender'
+                'name':'gender',
             }, 
                 choices=(
                     'Male',

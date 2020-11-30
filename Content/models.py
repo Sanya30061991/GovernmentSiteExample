@@ -10,7 +10,7 @@ class Citizen(models.Model):
     amount_of_accepted_projects = models.IntegerField(default=0)
     last_name = models.CharField(name="last_name", max_length=100, default="")
     bday = models.DateField(name="birth_day", auto_now=False)
-    gender = models.CharField(name="gender", default="Other", max_length=15)
+    gender = models.CharField(name="gender", default="Other", max_length=15, choices=[('Male','Male'), ('Female','Female'), ('Other','Other')])
     age = models.IntegerField(name="age", default=0)
 
     class Meta:
