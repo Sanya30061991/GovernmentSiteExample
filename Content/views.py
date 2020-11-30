@@ -11,3 +11,6 @@ def start_3(request):
 
 def start(request):
     return render(request, 'Content/start.html')
+
+def reg(request):
+    return render(request, 'Content/registration.html')
