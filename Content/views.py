@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from .models import Citizen
 from .forms import CitReg, UserReg, UserLog
 # Create your views here.
+
+def log_ex(request):
+    logout(request)
+    return redirect("start")
+
 def logon(request):
     context = {
         'form':UserLog()
@@ -23,7 +28,16 @@ def start_3(request):
     return render(request, 'Content/start3.html')
 
 def main(request):
-    return render(request, 'Content/start.html')
+    user = request.user
+    user_info = {
+        'fname':user.first_name,
+        'sname':user.last_name,
+    }
+    print(user)
+    context = {
+        'user':user_info
+    }
+    return render(request, 'Content/start.html', context)
 
 def reg(request):
     context = {
