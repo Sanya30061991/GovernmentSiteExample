@@ -15,12 +15,12 @@ def logon(request):
         'errors':""
     }
     if request.method == "POST":
-        user = authenticate(email=request.POST['email'])
-        # user = authenticate(request, email=email)
+        email=request.POST['email']
+        password=request.POST['password']
+        user = authenticate(username=email, password=password)
         if user is not None:
-            # login(request, user)
-            print("success")
-            # return redirect("main")
+            login(request, user)
+            return redirect("main")
         else:
             context['errors'] = "Invalid login or password!"
     return render(request, 'Content/login.html', context)
@@ -32,16 +32,10 @@ def start_3(request):
     return render(request, 'Content/start3.html')
 
 def main(request):
-    # user = request.user
-    # user_info = {
-    #     'fname':user.first_name,
-    #     'sname':user.last_name,
-    # }
-    # print(user)
-    # context = {
-    #     'user':user_info
-    # }
-    return render(request, 'Content/start.html')
+    context = {
+        'user':request.user
+    }
+    return render(request, 'Content/main.html')
 
 def reg(request):
     context = {
@@ -67,14 +61,14 @@ def reg(request):
         date_source = request.POST['birth_day']
         date = date_source[-4:] + "-" + date_source[-7:-5] + "-" + date_source[-10:-8]
         User.objects.create_user(
-            username = str(request.POST['first_name'] + request.POST['last_name']*2),
+            username = request.POST['email'],
             first_name = request.POST['first_name'],
             last_name = request.POST['last_name'],
             email = request.POST['email'],
             password = request.POST['password'],
         )
         new = Citizen(
-            user = User.objects.get(username = request.POST['first_name'] + request.POST['last_name']*2),
+            user = User.objects.get(username = request.POST['email']),
             department = deps.get(request.POST['res_code'][:2], "Other"),
             rank = ranks.get(request.POST['res_code'][2:4], "Citizen"),
             birth_day = date,

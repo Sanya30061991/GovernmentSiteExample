@@ -20,7 +20,7 @@ class Citizen(models.Model):
         verbose_name_plural = 'Citizens'
 
     def __str__(self):
-        return self.first_name + " " + self.last_name + " " + f"({self.department})" + f"[{self.rank}]"
+        return self.user.first_name + " " + self.user.last_name + " " + f"({self.department})" + f"[{self.rank}]"
 
 
 
