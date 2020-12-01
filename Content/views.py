@@ -37,6 +37,9 @@ def main(request):
     }
     return render(request, 'Content/main.html')
 
+def profile(request):
+    return render(request, 'Content/profile.html')
+
 def reg(request):
     context = {
         'form1':CitReg(),
