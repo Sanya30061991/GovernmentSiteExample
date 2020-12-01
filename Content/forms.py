@@ -2,7 +2,25 @@ from django.forms import ModelForm, TextInput, Textarea, DateInput, Select
 from django.contrib.auth.models import User
 from .models import Citizen
 
-
+class UserLog(ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'email',
+            'password'
+        ]
+        widgets = {
+            'email' : TextInput(attrs={
+                'class':"input100",
+                'type':"email",
+                'name':"email"
+            }),
+            'password' : TextInput(attrs={
+                'class':"input100",
+                'type':"password",
+                'name':"password"
+            }),
+        }
 
 class UserReg(ModelForm):
     class Meta:
