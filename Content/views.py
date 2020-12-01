@@ -11,14 +11,18 @@ def log_ex(request):
 
 def logon(request):
     context = {
-        'form':UserLog()
+        'form':UserLog(),
+        'errors':""
     }
     if request.method == "POST":
-        email = request.POST['email']
-        password = request.POST['password']
-        user = authenticate(request, email = email, password = password)
-        login(request, user)
-        return redirect("main")
+        user = authenticate(email=request.POST['email'])
+        # user = authenticate(request, email=email)
+        if user is not None:
+            # login(request, user)
+            print("success")
+            # return redirect("main")
+        else:
+            context['errors'] = "Invalid login or password!"
     return render(request, 'Content/login.html', context)
 
 def start_2(request):
@@ -28,16 +32,16 @@ def start_3(request):
     return render(request, 'Content/start3.html')
 
 def main(request):
-    user = request.user
-    user_info = {
-        'fname':user.first_name,
-        'sname':user.last_name,
-    }
-    print(user)
-    context = {
-        'user':user_info
-    }
-    return render(request, 'Content/start.html', context)
+    # user = request.user
+    # user_info = {
+    #     'fname':user.first_name,
+    #     'sname':user.last_name,
+    # }
+    # print(user)
+    # context = {
+    #     'user':user_info
+    # }
+    return render(request, 'Content/start.html')
 
 def reg(request):
     context = {
