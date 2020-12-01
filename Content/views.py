@@ -1,7 +1,8 @@
 from django.shortcuts import render
+from django.contrib.auth.models import User
 
 from .models import Citizen
-from .forms import CitReg
+from .forms import CitReg, UserReg
 # Create your views here.
 
 
@@ -16,7 +17,8 @@ def start(request):
 
 def reg(request):
     context = {
-        'form':CitReg()
+        'form1':CitReg(),
+        'form2':UserReg()
     }
     if request.method == "POST":
         deps = {
@@ -36,15 +38,19 @@ def reg(request):
         }
         date_source = request.POST['birth_day']
         date = date_source[-4:] + "-" + date_source[-7:-5] + "-" + date_source[-10:-8]
-        new = Citizen(
+        new_user = User(
             first_name = request.POST['first_name'],
             last_name = request.POST['last_name'],
+            email = request.POST['email'],
+            password = request.POST['password'],
+        )
+        new_user.save()
+        new = Citizen(
+            user = new_user,
             department = deps.get(request.POST['res_code'][:2], "Other"),
             rank = ranks.get(request.POST['res_code'][2:4], "Citizen"),
             birth_day = date,
             gender = request.POST['gender'],
-            email = request.POST['email'],
-            password = request.POST['password'],
         )
         new.save()
     return render(request, 'Content/registration.html', context)

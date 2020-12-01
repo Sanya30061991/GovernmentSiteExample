@@ -38,32 +38,32 @@
                     <form method="POST">
                         {% csrf_token %}
                         <div class="input-group">
-                            {{ form.first_name }}
+                            {{ form2.first_name }}
                         </div>
                         <div class="input-group">
-                            {{ form.last_name }}
+                            {{ form2.last_name }}
                         </div>
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    {{ form.birth_day }}
+                                    {{ form1.birth_day }}
                                     <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <div class="rs-select2 js-select-simple select--no-search">
-                                        {{ form.gender }}
+                                        {{ form1.gender }}
                                         <div class="select-dropdown"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="input-group">
-                            {{ form.email }}
+                            {{ form2.email }}
                         </div>
                         <div class="input-group">
-                            {{ form.password }}
+                            {{ form2.password }}
                         </div>
                         <div class="row row-space">
                             <div class="col-2">

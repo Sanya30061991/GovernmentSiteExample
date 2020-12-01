@@ -1,17 +1,18 @@
 from django.forms import ModelForm, TextInput, Textarea, DateInput, Select
+from django.contrib.auth.models import User
 from .models import Citizen
 
-class CitReg(ModelForm):
+
+
+class UserReg(ModelForm):
     class Meta:
-        model = Citizen
+        model = User
         fields = [
             'first_name',
             'last_name',
-            'birth_day',
-            'gender',
             'email',
             'password'
-            ]
+        ]
         widgets = {
             'first_name' : TextInput(attrs={
                 'class':"input--style-1",
@@ -25,6 +26,29 @@ class CitReg(ModelForm):
                 'placeholder':"SURNAME",
                 'name':"surname"
             }),
+            'email' : TextInput(attrs={
+                'class':"input--style-1",
+                'type':"text",
+                'placeholder':"EMAIL",
+                'name':"email"
+            }),
+            'password' : TextInput(attrs={
+                'class':"input--style-1",
+                'type':"text",
+                'placeholder':"PASSWORD",
+                'name':"password"
+            }),
+        }
+
+class CitReg(ModelForm):
+    class Meta:
+        model = Citizen
+        fields = [
+            'birth_day',
+            'gender',
+            ]
+        widgets = {
+            
             'birth_day' : DateInput(attrs={
                 'class':"input--style-1 js-datepicker",
                 'type':"text",
@@ -40,16 +64,5 @@ class CitReg(ModelForm):
                     'Other'
                     )
                 ),
-            'email' : TextInput(attrs={
-            'class':"input--style-1",
-            'type':"text",
-            'placeholder':"EMAIL",
-            'name':"email"
-            }),
-            'password' : TextInput(attrs={
-            'class':"input--style-1",
-            'type':"text",
-            'placeholder':"PASSWORD",
-            'name':"password"
-            }),
+            
         }
