@@ -49,16 +49,23 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="#">Home</a></li>
+          <li><a href="start">Home</a></li>
+          <li class="active"><a href="#">Main</a></li>
+          {% if user %}
+          <li><a href="profile">Profile</a></li>
+          {% endif %}
           <li><a href="index.html">Officials</a></li>
           <li><a href="#team">Laws</a></li>
           <!-- <li><a href="#contact"></a></li> -->
 
         </ul>
       </nav><!-- .nav-menu -->
-      
+      {% if user %}
             <a href="logout" class="get-started-btn scrollto">Logout</a>
-      
+      {% else %}
+      <a href="auth" class="get-started-btn scrollto">Sign-up</a>
+      <a href="login" class="get-started-btn scrollto">Log-in</a>
+      {% endif %}
     </div>
   </header><!-- End Header -->
 
@@ -67,7 +74,7 @@
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
-        <h2>Welcome, {{ user.first_name }}  {{ user.last_name }}</h2>
+        <h2>Welcome, {% if user %} {{ user.first_name }} {{ user.last_name }} {% else %} Citizen {% endif %}</h2>
       </div>
     </section><!-- End Breadcrumbs -->
 

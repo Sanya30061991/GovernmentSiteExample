@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth import login, authenticate, logout
 from .models import Citizen
 from .forms import CitReg, UserReg, UserLog
@@ -25,17 +25,26 @@ def logon(request):
             context['errors'] = "Invalid login or password!"
     return render(request, 'Content/login.html', context)
 
-def start_2(request):
-    return render(request, 'Content/start2.html')
+def start(request):
+    context = {
+        'user':None
+    }
+    if request.user.is_authenticated:
+        context = {
+            'user':request.user
+        }
+    return render(request, 'Content/start.html', context)
 
-def start_3(request):
-    return render(request, 'Content/start3.html')
 
 def main(request):
     context = {
-        'user':request.user
+        'user':None
     }
-    return render(request, 'Content/main.html')
+    if request.user.is_authenticated:
+        context = {
+            'user':request.user
+        }
+    return render(request, 'Content/main.html', context)
 
 def profile(request):
     return render(request, 'Content/profile.html')
