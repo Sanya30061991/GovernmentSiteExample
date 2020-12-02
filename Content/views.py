@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth import login, authenticate, logout
 from .models import Citizen
-from .forms import CitReg, UserReg, UserLog
+from .forms import CitReg, UserReg, UserLog, AvatarUpload
 # Create your views here.
 
 def log_ex(request):
@@ -46,8 +46,24 @@ def main(request):
         }
     return render(request, 'Content/main.html', context)
 
+# def handle_uploaded_file(file, request):
+#     with open(f'/media-cdn/avatars/{request.user.email}.jpg', 'x') as destination:
+#         for chunk in file.chunks():
+#             destination.write(chunk)
+
 def profile(request):
-    return render(request, 'Content/profile.html')
+    context = {
+        'user':None
+    }
+    if request.user.is_authenticated:
+        context = {
+            'user':request.user,
+            'cit':Citizen.objects.get(id=request.user.id),
+            'form':AvatarUpload()
+        }
+    if request.method == 'POST':
+        print(request.FILES)
+    return render(request, 'Content/profile.html', context)
 
 def reg(request):
     context = {

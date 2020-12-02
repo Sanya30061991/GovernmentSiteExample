@@ -1,6 +1,25 @@
-from django.forms import ModelForm, TextInput, Textarea, DateInput, Select
+from django.forms import ModelForm, TextInput, Textarea, DateInput, Select, FileInput
 from django.contrib.auth.models import User
 from .models import Citizen
+
+
+
+class AvatarUpload(ModelForm):
+    class Meta:
+        model = Citizen
+        fields = [
+            'avatar'
+        ]
+        widgets = {
+            'avatar' : FileInput(attrs={
+                "type":"file",
+                'alt':"Admin",
+                'class':"rounded-circle",
+                'width':"150",
+                'name':'new_av'
+            })
+        }
+
 
 class UserLog(ModelForm):
     class Meta:
