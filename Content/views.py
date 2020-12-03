@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth import login, authenticate, logout
 from .models import Citizen
 from .forms import CitReg, UserReg, UserLog, AvatarUpload
+
 # Create your views here.
 
 def log_ex(request):
@@ -46,10 +47,10 @@ def main(request):
         }
     return render(request, 'Content/main.html', context)
 
-# def handle_uploaded_file(file, request):
-#     with open(f'/media-cdn/avatars/{request.user.email}.jpg', 'x') as destination:
-#         for chunk in file.chunks():
-#             destination.write(chunk)
+def handle_uploaded_file(file, request):
+    with open(f'media/avatars/{request.user.email}.jpg', 'wb+') as destination:
+        for chunk in file.chunks():
+            destination.write(chunk)
 
 def profile(request):
     context = {
@@ -62,7 +63,11 @@ def profile(request):
             'form':AvatarUpload()
         }
     if request.method == 'POST':
-        print(request.FILES)
+        postfix = request.FILES['avatar'].name[request.FILES['avatar'].name.find("."):]
+        request.FILES['avatar'].name = request.user.email+postfix
+        handle_uploaded_file(request.FILES['avatar'], request)
+        context['cit'].avatar = request.FILES['avatar']
+        context['cit'].save()
     return render(request, 'Content/profile.html', context)
 
 def reg(request):
