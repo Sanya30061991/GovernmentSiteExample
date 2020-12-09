@@ -82,37 +82,40 @@
     <section id="portfolio-details" class="portfolio-details">
       <div class="container">
 
+        {% if project %}
         <div class="portfolio-details-container">
 <!-- Add if and for -->
       <h2>Fresh accepted project</h2>
-          <div class="owl-carousel portfolio-details-carousel">
-            <img src="{% static "img/portfolio/portfolio-details-1.jpg" %}" class="img-fluid" alt="">
-            <img src="{% static "img/portfolio/portfolio-details-2.jpg" %}" class="img-fluid" alt="">
-            <img src="{% static "img/portfolio/portfolio-details-3.jpg" %}" class="img-fluid" alt="">
-          </div>
-
-          <div class="portfolio-info">
-            <h3>Information:</h3>
-            <ul>
-              <li><strong>Name of project</strong>: name</li>
-              <li><strong>Creator</strong>: official</li>
-              <li><strong>Amount of votes</strong>: 5</li>
-              <li><strong>Project date</strong>: 01 March, 2020</li>
-              <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
-            </ul>
-          </div>
-
-        </div>
-
-        <div class="portfolio-description">
-          <h2>Description</h2>
-          <p>
-            Info
-          </p>
-        </div>
-
+      <div class="owl-carousel portfolio-details-carousel">
+        <img src="{% static "img/portfolio/portfolio-details-1.jpg" %}" class="img-fluid" alt="">
+        <img src="{% static "img/portfolio/portfolio-details-2.jpg" %}" class="img-fluid" alt="">
+        <img src="{% static "img/portfolio/portfolio-details-3.jpg" %}" class="img-fluid" alt="">
       </div>
-    </section><!-- End Portfolio Details Section -->
+      
+      <div class="portfolio-info">
+        <h3>Information:</h3>
+        <ul>
+          <li><strong>Title of project</strong>: name</li>
+          <li><strong>Creator</strong>: official</li>
+          <li><strong>Amount of votes</strong>: 5</li>
+          <li><strong>Project date</strong>: 01 March, 2020</li>
+          <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="portfolio-description">
+      <h2>Description</h2>
+      <p>
+        Info
+      </p>
+    </div>
+    {% else %}
+    <h1>There are no new projects and news.</h1>
+    {% endif %}
+    
+  </div>
+</section><!-- End Portfolio Details Section -->
 
   </main><!-- End #main -->
 

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Citizen(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # first_name = models.CharField(name="first_name", max_length=100)
@@ -27,6 +28,18 @@ class Citizen(models.Model):
     def __str__(self):
         return self.user.first_name + " " + self.user.last_name + " " + f"({self.department})" + f"[{self.rank}]"
 
-
-
 # Create your models here.
+class Project(models.Model):
+    title = models.CharField(name="title", max_length=120)
+    description = models.CharField(name="desc", max_length=1000)
+    votes = models.IntegerField(default=0)
+    sphere = models.CharField(name="sphere", max_length=15)
+    date_of_creation = models.DateField(auto_now=True)
+    creator = models.ForeignKey(Citizen, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Project"
+        verbose_name_plural = "Projects"
+
+    def __str__(self):
+        return self.title + f" {self.creator.user.first_name} {self.creator.user.last_name}"
