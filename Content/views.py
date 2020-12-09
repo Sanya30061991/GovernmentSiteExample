@@ -63,7 +63,7 @@ def profile(request):
             'form':AvatarUpload()
         }
     if request.method == 'POST':
-        postfix = request.FILES['avatar'].name[request.FILES['avatar'].name.find("."):]
+        postfix = request.FILES['avatar'].name[request.FILES['avatar'].name.rfind("."):]
         request.FILES['avatar'].name = request.user.email+postfix
         handle_uploaded_file(request.FILES['avatar'], request)
         context['cit'].avatar = request.FILES['avatar']
