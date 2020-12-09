@@ -1,3 +1,4 @@
+{% load mathfilters %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -170,23 +171,23 @@
                       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Offered government projects</h6>
                       <small>Healthcare</small>
                       <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ cit.health_projects }}%" aria-valuenow="{{ cit.health_projects }}" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Education</small>
                       <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ cit.ed_projects }}%" aria-valuenow="{{ cit.health_projects }}" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Military</small>
                       <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ cit.military_projects }}%" aria-valuenow="{{ cit.health_projects }}" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Social</small>
                       <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ cit.social_projects }}%" aria-valuenow="{{ cit.health_projects }}" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Cultural</small>
                       <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ cit.cult_projects }}%" aria-valuenow="{{ cit.health_projects }}" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                     </div>
                   </div>

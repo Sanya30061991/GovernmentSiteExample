@@ -60,7 +60,8 @@ def profile(request):
         context = {
             'user':request.user,
             'cit':Citizen.objects.get(id=request.user.id),
-            'form':AvatarUpload()
+            'form':AvatarUpload(),
+            'test':5
         }
     if request.method == 'POST':
         postfix = request.FILES['avatar'].name[request.FILES['avatar'].name.rfind("."):]
