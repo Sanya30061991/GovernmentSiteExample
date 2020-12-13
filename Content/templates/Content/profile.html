@@ -37,6 +37,9 @@
               <li class="active"><a href="#">Profile</a></li>
               <li><a href="index.html">Officials</a></li>
               <li><a href="#team">Laws</a></li>
+              {% if cit.is_staff %}
+              <li><a href="new_project">Create project</a></li>
+              {% endif %}
               <!-- <li><a href="#contact"></a></li> -->
     
             </ul>
