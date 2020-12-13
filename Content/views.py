@@ -27,9 +27,7 @@ def logon(request):
     return render(request, 'Content/login.html', context)
 
 def start(request):
-    context = {
-        'user':None
-    }
+    a = 1/0
     if request.user.is_authenticated:
         context = {
             'user':request.user
@@ -58,7 +56,6 @@ def profile(request):
     }
     if request.user.is_authenticated:
         context = {
-            'user':request.user,
             'cit':Citizen.objects.get(id=request.user.id),
             'form':AvatarUpload(),
             'test':5

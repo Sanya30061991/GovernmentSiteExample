@@ -20,6 +20,7 @@ class Citizen(models.Model):
     military_proj = models.IntegerField(name="military_projects", default=0)
     social_proj = models.IntegerField(name="social_projects", default=0)
     cult_proj = models.IntegerField(name="cult_projects", default=0)
+    is_staff = models.BooleanField(name="is_staff", default=False)
 
     class Meta:
         verbose_name = 'Citizen'
@@ -43,3 +44,16 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title + f" {self.creator.user.first_name} {self.creator.user.last_name}"
+
+
+class ProjectPhoto(models.Model):
+    title = models.CharField(name="title", max_length=120)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    photo = models.ImageField(name="photo", upload_to='project photos')
+
+    class Meta:
+        verbose_name = "Project photo"
+        verbose_name_plural = "Project photos"
+    
+    def __str__(self):
+        return self.title + f"({self.project.title})"
