@@ -25,7 +25,8 @@ def auth(request, context):
 def login_check(request):
     """Method that checks whether user is logged in or not. Returns also a Citizen object if user is logged in."""
     context = {
-        'user':None
+        'user':None,
+        'cit':None
     }
     if request.user.is_authenticated:
         context = {
@@ -49,7 +50,7 @@ def handle_image(request, context):
     context['cit'].save()
 
 def user_creating(request, context):
-    """Registration method, which considers user's job and status, and saving models."""
+    """Registration method, which considers user's job and status, and saves models."""
     deps = {
             '01':'Presidential branch',
             '02':'Healthcare Sphere',

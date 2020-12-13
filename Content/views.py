@@ -3,13 +3,15 @@ from .models import Citizen
 from .forms import CitReg, UserReg, UserLog, AvatarUpload
 
 # Create your views here.
-from .views_cases import auth, login_check, handle_image, log_off
+from .views_cases import auth, login_check, handle_image, log_off, user_creating
 
+def project_make(request):
+    context = login_check(request)
+    return render(request, 'Content/create_projec.html', context)
 
 def log_ex(request):
     return log_off(request)
     
-
 def logon(request):
     context = {
         'form':UserLog(),
@@ -29,11 +31,7 @@ def main(request):
 
 def profile(request):
     context = login_check(request)
-    context = {
-        'cit':Citizen.objects.get(id=request.user.id),
-        'form':AvatarUpload(),
-        'test':5
-    }
+    context['form'] = AvatarUpload()
     if request.method == 'POST':
         handle_image(request, context)
     return render(request, 'Content/profile.html', context)
