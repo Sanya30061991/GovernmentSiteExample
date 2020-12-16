@@ -3,11 +3,15 @@ from .models import Citizen
 from .forms import CitReg, UserReg, UserLog, AvatarUpload
 
 # Create your views here.
-from .views_cases import auth, login_check, handle_image, log_off, user_creating
+from .views_cases import auth, login_check, handle_image, \
+                        log_off, user_creating, project_creating 
 
 def project_make(request):
     context = login_check(request)
-    return render(request, 'Content/create_projec.html', context)
+    if request.method == "POST":
+        pass
+        # project_creating(request)
+    return render(request, 'Content/create_project.html', context)
 
 def log_ex(request):
     return log_off(request)

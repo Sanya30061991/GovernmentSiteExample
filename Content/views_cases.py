@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 
-from .models import Citizen
+from .models import Citizen, Project, ProjectPhoto
 
 def log_off(request):
     """Simple logging-in method."""
@@ -84,3 +84,31 @@ def user_creating(request, context):
     )
     new.save()
     return redirect("login")
+
+def project_creating(request):
+    """
+    New project creationg functions. Creates project model,
+    updates Citizen model, saves uploaded files to media.
+    """
+    citizen_id = request.user.id
+    citizen = Citizen.objects.get(id=citizen_id)
+    project = Project(
+        title = request.POST['title'],
+        description = request.POST['desc'],
+        votes = 0,
+        creator = citizen,
+        sphere = request.POST['sphere']
+    )
+    sphere_dict = {
+        'ed':citizen.ed_proj,
+        'health':citizen.health_proj,
+        'military':citizen.military_proj,
+        'social':citizen.social_proj,
+        'cult':citizen.cult_proj
+    }
+    sphere_dict[request.POST['sphere']] += 1
+    citizen.save()
+    project.save()
+    for file in request.FILES['images']:
+        pass
+    
