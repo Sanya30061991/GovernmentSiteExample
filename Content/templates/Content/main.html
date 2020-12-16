@@ -90,19 +90,19 @@
 <!-- Add if and for -->
       <h2>Fresh accepted project</h2>
       <div class="owl-carousel portfolio-details-carousel">
-        <img src="{% static "img/portfolio/portfolio-details-1.jpg" %}" class="img-fluid" alt="">
-        <img src="{% static "img/portfolio/portfolio-details-2.jpg" %}" class="img-fluid" alt="">
-        <img src="{% static "img/portfolio/portfolio-details-3.jpg" %}" class="img-fluid" alt="">
+        {% for photo in photos %}
+        <img src="{{ photo.photo.url }}" class="img-fluid" alt="">
+        {% endfor %}
       </div>
       
       <div class="portfolio-info">
         <h3>Information:</h3>
         <ul>
-          <li><strong>Title of project</strong>: name</li>
-          <li><strong>Creator</strong>: official</li>
-          <li><strong>Amount of votes</strong>: 5</li>
-          <li><strong>Project date</strong>: 01 March, 2020</li>
-          <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+          <li><strong>Title of project</strong>: {{ project.title }}</li>
+          <li><strong>Creator</strong>: {{ project.creator.user.first_name }} {{ project.creator.user.last_name }}</li>
+          <li><strong>Amount of votes</strong>: {{ project.votes }}</li>
+          <li><strong>Project date</strong>: {{ project.date_of_creation }}</li>
+          <li><strong>Project sphere</strong>: {{ project.sphere }}</li>
         </ul>
       </div>
     </div>
@@ -110,7 +110,7 @@
     <div class="portfolio-description">
       <h2>Description</h2>
       <p>
-        Info
+        {{ project.desc }}
       </p>
     </div>
     {% else %}

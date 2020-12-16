@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import Citizen
+from .models import Citizen, ProjectPhoto, Project
 from .forms import CitReg, UserReg, UserLog, AvatarUpload
 
 # Create your views here.
 from .views_cases import auth, login_check, handle_image, \
-                        log_off, user_creating, project_creating 
+                        log_off, user_creating, \
+                        project_creating 
 
 def project_make(request):
     context = login_check(request)
@@ -30,6 +31,12 @@ def start(request):
 
 def main(request):
     context = login_check(request)
+    try:
+        project = Project.objects.latest('id')
+        context['project'] = project
+        context['photos'] = ProjectPhoto.objects.filter(project=project.id)
+    except Exception:
+        context['project'] = None
     return render(request, 'Content/main.html', context)
 
 def profile(request):

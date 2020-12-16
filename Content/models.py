@@ -15,11 +15,11 @@ class Citizen(models.Model):
     gender = models.CharField(name="gender", default="Other", max_length=15, choices=[('Male','Male'), ('Female','Female'), ('Other','Other')])
     age = models.IntegerField(name="age", default=0)
     rank = models.CharField(name="rank", default="", max_length=100)
-    ed_proj = models.IntegerField(name="ed_projects", default=0)
-    health_proj = models.IntegerField(name="health_projects", default=0)
+    ed_proj = models.IntegerField(name="education_projects", default=0)
+    health_proj = models.IntegerField(name="healthcare_projects", default=0)
     military_proj = models.IntegerField(name="military_projects", default=0)
     social_proj = models.IntegerField(name="social_projects", default=0)
-    cult_proj = models.IntegerField(name="cult_projects", default=0)
+    cult_proj = models.IntegerField(name="culture_projects", default=0)
     is_staff = models.BooleanField(name="is_staff", default=False)
 
     class Meta:

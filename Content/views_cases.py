@@ -35,18 +35,11 @@ def login_check(request):
         }
     return context
 
-def handle_uploaded_file(file, file_name, file_postfix, dest):
-    """Function that handles uploaded file and writes it chunk by chunk in 'media/avatars/..."""
-    with open(f'media/{dest}/{file_name}{file_postfix}', 'wb+') as destination:
-        for chunk in file.chunks():
-            destination.write(chunk)
-
 def handle_image(request, context):
     """Function that takes  image out of request.FILES and cuts off it's prefix and common name."""
     postfix = request.FILES['avatar'].name[request.FILES['avatar'].name.rfind("."):]
     title = request.user.email
     request.FILES['avatar'].name = request.user.email+postfix
-    handle_uploaded_file(request.FILES['avatar'], title, postfix)
     context['cit'].avatar = request.FILES['avatar']
     context['cit'].save()
 
@@ -83,6 +76,8 @@ def user_creating(request, context):
         birth_day = date,
         gender = request.POST['gender'],
     )
+    if new.rank != "Citizen":
+        new.is_staff = True
     new.save()
     return redirect("login")
 
@@ -100,14 +95,7 @@ def project_creating(request):
         creator = citizen,
         sphere = request.POST['sphere']
     )
-    sphere_dict = {
-        'ed':citizen.ed_projects,
-        'health':citizen.health_projects,
-        'military':citizen.military_projects,
-        'social':citizen.social_projects,
-        'cult':citizen.cult_projects
-    }
-    sphere_dict[request.POST['sphere']] += 1
+    citizen.__dict__[request.POST['sphere'].lower()+'_projects'] += 1
     citizen.save()
     project.save()
     k = 1
@@ -124,7 +112,6 @@ def project_creating(request):
             project = project,
             photo = file
         )
-        handle_uploaded_file(file, title, postfix, dest)
         photo.save()
         k += 1
     
