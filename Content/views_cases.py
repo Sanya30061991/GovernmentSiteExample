@@ -35,17 +35,18 @@ def login_check(request):
         }
     return context
 
-def handle_uploaded_file(file, request):
+def handle_uploaded_file(file, file_name, file_postfix, dest):
     """Function that handles uploaded file and writes it chunk by chunk in 'media/avatars/..."""
-    with open(f'media/avatars/{request.user.email}.jpg', 'wb+') as destination:
+    with open(f'media/{dest}/{file_name}{file_postfix}', 'wb+') as destination:
         for chunk in file.chunks():
             destination.write(chunk)
 
 def handle_image(request, context):
     """Function that takes  image out of request.FILES and cuts off it's prefix and common name."""
     postfix = request.FILES['avatar'].name[request.FILES['avatar'].name.rfind("."):]
+    title = request.user.email
     request.FILES['avatar'].name = request.user.email+postfix
-    handle_uploaded_file(request.FILES['avatar'], request)
+    handle_uploaded_file(request.FILES['avatar'], title, postfix)
     context['cit'].avatar = request.FILES['avatar']
     context['cit'].save()
 
@@ -94,21 +95,36 @@ def project_creating(request):
     citizen = Citizen.objects.get(id=citizen_id)
     project = Project(
         title = request.POST['title'],
-        description = request.POST['desc'],
+        desc = request.POST['desc'],
         votes = 0,
         creator = citizen,
         sphere = request.POST['sphere']
     )
     sphere_dict = {
-        'ed':citizen.ed_proj,
-        'health':citizen.health_proj,
-        'military':citizen.military_proj,
-        'social':citizen.social_proj,
-        'cult':citizen.cult_proj
+        'ed':citizen.ed_projects,
+        'health':citizen.health_projects,
+        'military':citizen.military_projects,
+        'social':citizen.social_projects,
+        'cult':citizen.cult_projects
     }
     sphere_dict[request.POST['sphere']] += 1
     citizen.save()
     project.save()
-    for file in request.FILES['images']:
-        pass
+    k = 1
+    dest = "project_photos"
+    for file in request.FILES.getlist('images'):
+        postfix = file.name[file.name.rfind("."):]
+        title = citizen.user.first_name + \
+                "_" + citizen.user.last_name + \
+                "_" + project.title + \
+                "_" + str(k) + postfix
+        file.name = title + postfix
+        photo = ProjectPhoto(
+            title = title,
+            project = project,
+            photo = file
+        )
+        handle_uploaded_file(file, title, postfix, dest)
+        photo.save()
+        k += 1
     

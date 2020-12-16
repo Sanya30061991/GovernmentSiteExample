@@ -49,7 +49,7 @@ class Project(models.Model):
 class ProjectPhoto(models.Model):
     title = models.CharField(name="title", max_length=120)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    photo = models.ImageField(name="photo", upload_to='project photos')
+    photo = models.ImageField(name="photo", upload_to='project_photos')
 
     class Meta:
         verbose_name = "Project photo"
