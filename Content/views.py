@@ -10,7 +10,7 @@ from .views_cases import auth, login_check, handle_image, \
 def project_make(request):
     context = login_check(request)
     if request.method == "POST":
-        project_creating(request)
+        return project_creating(request)
     return render(request, 'Content/create_project.html', context)
 
 def log_ex(request):

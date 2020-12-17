@@ -10,5 +10,5 @@ urlpatterns = [
     path('logout', log_ex),
     path('profile', profile),
     path('new_project', project_make),
-    path('fin_project', finished_project)
+    path('fin_project', finished_project, name="project_finished")
 ]
