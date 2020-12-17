@@ -114,4 +114,5 @@ def project_creating(request):
         )
         photo.save()
         k += 1
+    return redirect("project_finished")
     

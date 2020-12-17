@@ -54,3 +54,6 @@ def reg(request):
     if request.method == "POST":
         return user_creating(request, context)
     return render(request, 'Content/registration.html', context)
+
+def finished_project(request):
+    return render(request, 'Content/finished_project.html')
