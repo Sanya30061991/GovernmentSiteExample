@@ -59,7 +59,7 @@
                   <div class="d-flex flex-column align-items-center text-center">
                     {% if cit.avatar %}
                     <img src="{{ cit.avatar.url }}"" alt="Admin" class="rounded-circle" width="150">
-                    {% else %}
+                    {% elif not cit.avatar and request.user.id == user.id %}
                     <form method="post" enctype="multipart/form-data">
                       <label for="">Click below to update your avatar</label>
                       {% csrf_token %}

@@ -84,7 +84,13 @@
     <!-- ======= Portfolio Details Section ======= -->
     <section id="portfolio-details" class="portfolio-details">
       <div class="container">
-        
+        {% if team %}
+        {% for official in team %}
+        <a href="profile?id={{official.id}}">
+          {{official.user.first_name}}
+        </a>
+        {% endfor %}
+        {% endif %}
       </div>
     </section><!-- End Portfolio Details Section -->
 

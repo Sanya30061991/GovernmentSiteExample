@@ -5,6 +5,14 @@ from django.contrib.auth.models import User
 from .models import Citizen, Project, ProjectPhoto
 
 
+def get_data_context_transfer(request):
+    prof_id = request.GET['id']
+    context = {
+        'cit':Citizen.objects.get(id=prof_id),
+        'user':User.objects.get(id=prof_id)
+    }
+    return context
+
 def context_data_preparing(request):
     """Prepares context data for rendering in html page."""
     try:

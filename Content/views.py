@@ -5,10 +5,12 @@ from .forms import CitReg, UserReg, UserLog, AvatarUpload
 # Create your views here.
 from .views_cases import auth, login_check, handle_image, \
                         log_off, user_creating, \
-                        project_creating, context_data_preparing
+                        project_creating, context_data_preparing, \
+                        get_data_context_transfer
 
 def team(request):
     context = context_data_preparing(request)
+    context['team'] = Citizen.objects.all()
     return render(request, 'Content/team.html', context)
 
 def project_make(request):
@@ -45,9 +47,11 @@ def main(request):
 
 def profile(request):
     context = login_check(request)
-    context['form'] = AvatarUpload()
     if request.method == 'POST':
         handle_image(request, context)
+    elif request.method == "GET" and 'id' in request.GET:
+        context = get_data_context_transfer(request)
+    context['form'] = AvatarUpload()
     return render(request, 'Content/profile.html', context)
 
 def reg(request):
