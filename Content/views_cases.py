@@ -129,7 +129,7 @@ def project_creating(request):
                 "_" + citizen.user.last_name + \
                 "_" + project.title + \
                 "_" + str(k) + postfix
-        file.name = title + postfix
+        file.name = title 
         photo = ProjectPhoto(
             title = title,
             project = project,
