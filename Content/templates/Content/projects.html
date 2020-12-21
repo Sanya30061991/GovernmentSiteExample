@@ -105,6 +105,11 @@
             <li><strong>Amount of votes</strong>: {{ project.votes }}</li>
             <li><strong>Project date</strong>: {{ project.date_of_creation }}</li>
             <li><strong>Project sphere</strong>: {{ project.sphere }}</li>
+            <form method="post">
+              {% csrf_token %}
+              <input type="hidden" name="id" value="{{ project.id }}">
+              <button type="submit" class="btn btn-outline-primary">Vote for this project</button>
+            </form>
           </ul>
         </div>
       </div>

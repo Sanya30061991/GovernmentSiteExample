@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
 class Citizen(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # first_name = models.CharField(name="first_name", max_length=100)
@@ -57,3 +58,14 @@ class ProjectPhoto(models.Model):
     
     def __str__(self):
         return self.title + f"({self.project.title})"
+        
+class Vote(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    voter = models.ForeignKey(Citizen, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Vote"
+        verbose_name_plural = "Votes"
+
+    def __str__(self):
+        return f"Vote of {self.voter.user.first_name} {self.voter.user.last_name} for project: {self.project.title}"

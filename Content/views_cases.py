@@ -139,3 +139,6 @@ def project_creating(request):
         k += 1
     return redirect("project_finished")
     
+
+def vote_for_project(request):
+    pass
