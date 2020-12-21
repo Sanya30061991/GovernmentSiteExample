@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import main, start, reg, logon, log_ex, \
     profile, project_make, finished_project, \
-        team, projects
+        team, projects, project_view
 
 
 urlpatterns = [
@@ -14,5 +14,6 @@ urlpatterns = [
     path('new_project', project_make),
     path('fin_project', finished_project, name="project_finished"),
     path('team', team),
-    path('projects', projects)
+    path('projects', projects),
+    path('project', project_view)
 ]

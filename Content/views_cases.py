@@ -145,10 +145,31 @@ def project_creating(request):
 def vote_for_project(request):
     """This method creates new vote of the official for the project."""
     project = Project.objects.get(id=request.POST['id'])
-    vote = Vote(
+    votes = Vote.objects.filter(
         project = project,
-        voter = Citizen.objects.get(user = request.user.id)
+        voter = Citizen.objects.get(user=request.user.id)
     )
-    vote.save()
-    project.votes += 1
-    project.save()
+    if len(votes) == 0:
+        vote = Vote(
+            project = project,
+            voter = Citizen.objects.get(user=request.user.id)
+        )
+        vote.save()
+        project.votes += 1
+        project.save()
+
+def project_view_context_data_preparation(request):
+    proj_id = request.GET['id']
+    context = {
+        'project':Project.objects.get(id=proj_id),
+        'photos':ProjectPhoto.objects.filter(project = proj_id)
+    }
+    context['vote'] = Vote.objects.filter(
+        project_id=proj_id,
+        voter_id=request.user.id
+        )
+    if len(context['vote']) > 0:
+        context['vote'] = context['vote'][0]
+    else:
+        context['vote'] = None
+    return context

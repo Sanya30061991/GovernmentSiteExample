@@ -6,7 +6,8 @@ from .forms import CitReg, UserReg, UserLog, AvatarUpload
 from .views_cases import auth, login_check, handle_image, \
                         log_off, user_creating, \
                         project_creating, context_data_preparing, \
-                        get_data_context_transfer, vote_for_project
+                        get_data_context_transfer, vote_for_project, \
+                        project_view_context_data_preparation
 
 def team(request):
     context = context_data_preparing(request)
@@ -71,6 +72,10 @@ def projects(request):
     context['projects'] = Project.objects.all()
     context['photos'] = ProjectPhoto.objects.all()
     context['votes'] = Vote.objects.all()
+    return render(request, 'Content/projects.html', context)
+
+def project_view(request):
+    context = project_view_context_data_preparation(request)
     if request.method == "POST":
         vote_for_project(request)
-    return render(request, 'Content/projects.html', context)
+    return render(request, 'Content/project.html', context)

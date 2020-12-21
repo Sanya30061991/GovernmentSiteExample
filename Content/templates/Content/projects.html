@@ -88,19 +88,16 @@
           {% if projects %}
           <div class="row">
           {% for project in projects %}
-            <div class="card col-xl-3 col-lg-4 col-md-6 col-xs-12" style="display: inline-block;">
+            <div class="custom-card col-xl-3 col-lg-4 col-md-6 col-xs-12" style="display: inline-block;">
               <h3>Title of project: {{ project.title }}</h3>
               <ul>
                 <li><strong>Creator</strong>: {{ project.creator.user.first_name }} {{ project.creator.user.last_name }}</li>
                 <li><strong>Amount of votes</strong>: {{ project.votes }}</li>
                 <li><strong>Project date</strong>: {{ project.date_of_creation }}</li>
                 <li><strong>Project sphere</strong>: {{ project.sphere }}</li>
-                <form method="get">
-                  {% csrf_token %}
-                  <input type="hidden" name="id" value="{{ project.id }}">
-                  <br>
+                <a href="project?id={{project.id}}">
                   <button type="submit" class="btn btn-outline-primary">Details</button>
-                </form>
+                </a>
               </ul>
             </div>
             

@@ -50,12 +50,12 @@
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li><a href="start">Home</a></li>
-          <li><a href="main">Main</a></li>
+          <li class="active"><a href="#">Main</a></li>
           {% if user %}
           <li><a href="profile">Profile</a></li>
           {% endif %}
           <li><a href="team">Officials</a></li>
-          <li class="active"><a href="#">Projects</a></li>
+          <li><a href="projects">Projects</a></li>
           {% if cit.is_staff %}
           <li><a href="new_project">Create project</a></li>
           {% endif %}
@@ -83,52 +83,51 @@
 
     <!-- ======= Portfolio Details Section ======= -->
     <section id="portfolio-details" class="portfolio-details">
-        <div class="container">
-  
-          {% if projects %}
-          {% for project in projects %}
-          <div class="portfolio-details-container">
-  <!-- Add if and for -->
-        <div class="owl-carousel portfolio-details-carousel">
-          {% for photo in photos %}
-          {% if project.id == photo.project.id %}
-          <img src="{{ photo.photo.url }}" class="img-fluid" alt="">
-          {% endif %}
-          {% endfor %}
-        </div>
-        
-        <div class="portfolio-info">
-          <h3>Information:</h3>
-          <ul>
-            <li><strong>Title of project</strong>: {{ project.title }}</li>
-            <li><strong>Creator</strong>: {{ project.creator.user.first_name }} {{ project.creator.user.last_name }}</li>
-            <li><strong>Amount of votes</strong>: {{ project.votes }}</li>
-            <li><strong>Project date</strong>: {{ project.date_of_creation }}</li>
-            <li><strong>Project sphere</strong>: {{ project.sphere }}</li>
-            <form method="post">
+      <div class="container">
+
+        {% if project %}
+        <div class="portfolio-details-container">
+<!-- Add if and for -->
+      <h2>Fresh accepted project</h2>
+      <div class="owl-carousel portfolio-details-carousel">
+        {% for photo in photos %}
+        <img src="{{ photo.photo.url }}" class="img-fluid" alt="">
+        {% endfor %}
+      </div>
+      
+      <div class="portfolio-info">
+        <h3>Information:</h3>
+        <ul>
+          <li><strong>Title of project</strong>: {{ project.title }}</li>
+          <li><strong>Creator</strong>: {{ project.creator.user.first_name }} {{ project.creator.user.last_name }}</li>
+          <li><strong>Amount of votes</strong>: {{ project.votes }}</li>
+          <li><strong>Project date</strong>: {{ project.date_of_creation }}</li>
+          <li><strong>Project sphere</strong>: {{ project.sphere }}</li>
+          {% if vote or request.method == "POST" %}
+          <li><button disabled class="btn btn-outline-secondary">You have already voted for this project</button></li>
+          {% else %}
+          <form method="post">
               {% csrf_token %}
-              <input type="hidden" name="id" value="{{ project.id }}">
-              {%  %}
-              <button type="submit" class="btn btn-outline-primary">Vote for this project</button>
+              <input type="hidden" name="id" value={{  project.id }}>
+              <li><button type="submit" class="btn btn-outline-primary">Vote for this project</button></li>
             </form>
-          </ul>
-        </div>
+            {% endif %}
+        </ul>
       </div>
-      
-      <div class="portfolio-description">
-        <h2>Description</h2>
-        <p>
-          {{ project.desc }}
-        </p>
-      </div>
-      {% endfor %}
-      {% else %}
-      <h1>There are no new projects and news.</h1>
-      {% endif %}
-      
     </div>
-  </section>
-            
+    
+    <div class="portfolio-description">
+      <h2>Description</h2>
+      <p>
+        {{ project.desc }}
+      </p>
+    </div>
+    {% else %}
+    <h1>There are no new projects and news.</h1>
+    {% endif %}
+    
+  </div>
+</section><!-- End Portfolio Details Section -->
 
   </main><!-- End #main -->
 

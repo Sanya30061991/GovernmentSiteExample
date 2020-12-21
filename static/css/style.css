@@ -1841,7 +1841,7 @@ section {
   }
 }
 
-.card {
+.custom-card {
   cursor: pointer;
   display: inline;
   font-size: 15px;
@@ -1852,4 +1852,5 @@ section {
   padding: 8px 20px;
   border-radius: 30px;
   font-family: "Poppins", sans-serif;
+  border: 1px solid rgb(144, 144, 144);
 }
