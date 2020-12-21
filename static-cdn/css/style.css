@@ -1840,3 +1840,16 @@ section {
     padding-top: 4px;
   }
 }
+
+.card {
+  cursor: pointer;
+ display: inline;
+ font-size: 15px;
+ font-weight: 500;
+ line-height: 1;
+ color: #444444;
+ transition: all 0.3s;
+ padding: 8px 20px;
+ border-radius: 30px;
+ font-family: "Poppins", sans-serif;
+}

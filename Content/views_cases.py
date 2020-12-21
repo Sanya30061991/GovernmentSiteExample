@@ -2,10 +2,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 
-from .models import Citizen, Project, ProjectPhoto
+from .models import Citizen, Project, ProjectPhoto, Vote
 
 
 def get_data_context_transfer(request):
+    """This method creates context for the profile page
+     when you look at someone else's profile"""
     prof_id = request.GET['id']
     context = {
         'cit':Citizen.objects.get(id=prof_id),
@@ -141,4 +143,12 @@ def project_creating(request):
     
 
 def vote_for_project(request):
-    pass
+    """This method creates new vote of the official for the project."""
+    project = Project.objects.get(id=request.POST['id'])
+    vote = Vote(
+        project = project,
+        voter = Citizen.objects.get(user = request.user.id)
+    )
+    vote.save()
+    project.votes += 1
+    project.save()

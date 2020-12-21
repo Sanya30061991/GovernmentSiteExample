@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Citizen, ProjectPhoto, Project
+from .models import Citizen, ProjectPhoto, Project, Vote
 from .forms import CitReg, UserReg, UserLog, AvatarUpload
 
 # Create your views here.
@@ -70,6 +70,7 @@ def projects(request):
     context = login_check(request)
     context['projects'] = Project.objects.all()
     context['photos'] = ProjectPhoto.objects.all()
+    context['votes'] = Vote.objects.all()
     if request.method == "POST":
         vote_for_project(request)
     return render(request, 'Content/projects.html', context)

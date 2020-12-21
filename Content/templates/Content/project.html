@@ -86,26 +86,42 @@
         <div class="container">
   
           {% if projects %}
-          <div class="row">
           {% for project in projects %}
-            <div class="card col-xl-3 col-lg-4 col-md-6 col-xs-12" style="display: inline-block;">
-              <h3>Title of project: {{ project.title }}</h3>
-              <ul>
-                <li><strong>Creator</strong>: {{ project.creator.user.first_name }} {{ project.creator.user.last_name }}</li>
-                <li><strong>Amount of votes</strong>: {{ project.votes }}</li>
-                <li><strong>Project date</strong>: {{ project.date_of_creation }}</li>
-                <li><strong>Project sphere</strong>: {{ project.sphere }}</li>
-                <form method="get">
-                  {% csrf_token %}
-                  <input type="hidden" name="id" value="{{ project.id }}">
-                  <br>
-                  <button type="submit" class="btn btn-outline-primary">Details</button>
-                </form>
-              </ul>
-            </div>
-            
-            {% endfor %}
-          </div>
+          <div class="portfolio-details-container">
+  <!-- Add if and for -->
+        <div class="owl-carousel portfolio-details-carousel">
+          {% for photo in photos %}
+          {% if project.id == photo.project.id %}
+          <img src="{{ photo.photo.url }}" class="img-fluid" alt="">
+          {% endif %}
+          {% endfor %}
+        </div>
+        
+        <div class="portfolio-info">
+          <h3>Information:</h3>
+          <ul>
+            <li><strong>Title of project</strong>: {{ project.title }}</li>
+            <li><strong>Creator</strong>: {{ project.creator.user.first_name }} {{ project.creator.user.last_name }}</li>
+            <li><strong>Amount of votes</strong>: {{ project.votes }}</li>
+            <li><strong>Project date</strong>: {{ project.date_of_creation }}</li>
+            <li><strong>Project sphere</strong>: {{ project.sphere }}</li>
+            <form method="post">
+              {% csrf_token %}
+              <input type="hidden" name="id" value="{{ project.id }}">
+              {%  %}
+              <button type="submit" class="btn btn-outline-primary">Vote for this project</button>
+            </form>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="portfolio-description">
+        <h2>Description</h2>
+        <p>
+          {{ project.desc }}
+        </p>
+      </div>
+      {% endfor %}
       {% else %}
       <h1>There are no new projects and news.</h1>
       {% endif %}
