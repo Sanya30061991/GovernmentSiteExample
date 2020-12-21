@@ -5,7 +5,11 @@ from .forms import CitReg, UserReg, UserLog, AvatarUpload
 # Create your views here.
 from .views_cases import auth, login_check, handle_image, \
                         log_off, user_creating, \
-                        project_creating 
+                        project_creating, context_data_preparing
+
+def team(request):
+    context = context_data_preparing(request)
+    return render(request, 'Content/team.html', context)
 
 def project_make(request):
     context = login_check(request)

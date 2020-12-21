@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>New project creating</title>
+  <title>Gov site</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -43,26 +43,32 @@
   <header id="header" class="fixed-top header-inner-pages">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="main">Create your own project</a></h1>
+      <h1 class="logo mr-auto"><a href="#">Government site example</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li><a href="start">Home</a></li>
-          <li ><a href="main">Main</a></li>
-          <li><a href="profile">Profile</a></li>
-          <li><a href="team">Officials</a></li>
-          <li><a href="#team">Projects</a></li>
-          {% if cit.is_staff %}
-          <li class="active"><a href="#">Create project</a></li>
-          {% endif %}
+            <li><a href="start">Home</a></li>
+            <li ><a href="main">Main</a></li>
+            {% if user %}
+            <li><a href="profile">Profile</a></li>
+            {% endif %}
+            <li class="active"><a href="#">Officials</a></li>
+            <li><a href="#">Projects</a></li>
+            {% if cit.is_staff %}
+            <li><a href="new_project">Create project</a></li>
+            {% endif %}
           <!-- <li><a href="#contact"></a></li> -->
+
         </ul>
-      </nav>
-
-      <a href="logout" class="get-started-btn scrollto">Logout</a>
-
+      </nav><!-- .nav-menu -->
+      {% if user %}
+            <a href="logout" class="get-started-btn scrollto">Logout</a>
+      {% else %}
+      <a href="auth" class="get-started-btn scrollto">Sign-up</a>
+      <a href="login" class="get-started-btn scrollto">Log-in</a>
+      {% endif %}
     </div>
   </header><!-- End Header -->
 
@@ -71,17 +77,16 @@
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
-
-        <h2>Project creation</h2>
-
+        <h2>Welcome, {% if user %} {{ user.first_name }} {{ user.last_name }} {% else %} Citizen {% endif %}</h2>
       </div>
     </section><!-- End Breadcrumbs -->
 
-    <section class="inner-page">
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
       <div class="container">
-        <h1>Project successfully created!</h1>
+        
       </div>
-    </section>
+    </section><!-- End Portfolio Details Section -->
 
   </main><!-- End #main -->
 
@@ -148,7 +153,7 @@
   <script src="{% static "vendor/aos/aos.js" %}"></script>
 
   <!-- Template Main JS File -->
-  <script src="{% static "js/main.js" %}"></script>
+  <script src="{% static "/js/main.js" %}"></script>
 
 </body>
 

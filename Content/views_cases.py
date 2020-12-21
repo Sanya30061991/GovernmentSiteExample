@@ -4,6 +4,21 @@ from django.contrib.auth.models import User
 
 from .models import Citizen, Project, ProjectPhoto
 
+
+def context_data_preparing(request):
+    """Prepares context data for rendering in html page."""
+    try:
+        context = {
+            'cit':Citizen.objects.get(id=request.user.id),
+            'user':request.user
+        }
+    except Exception:
+        context = {
+            'cit':None,
+            'user':None
+        }
+    return context
+
 def log_off(request):
     """Simple logging-in method."""
     logout(request)
