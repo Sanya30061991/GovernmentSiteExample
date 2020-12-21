@@ -33,20 +33,25 @@
           <nav class="nav-menu d-none d-lg-block">
             <ul>
               <li><a href="start">Home</a></li>
-              <li ><a href="main">Main</a></li>
+              <li><a href="main">Main</a></li>
+              {% if user.id == request.user.id %}
               <li class="active"><a href="#">Profile</a></li>
+              {% endif %}
               <li><a href="team">Officials</a></li>
               <li><a href="#team">Projects</a></li>
-              {% if cit.is_staff %}
+              {% if cit.is_staff and user.id == request.user.id %}
               <li><a href="new_project">Create project</a></li>
               {% endif %}
               <!-- <li><a href="#contact"></a></li> -->
     
             </ul>
           </nav><!-- .nav-menu -->
-          
+          {% if user %}
                 <a href="logout" class="get-started-btn scrollto">Logout</a>
-          
+          {% else %}
+          <a href="auth" class="get-started-btn scrollto">Sign-up</a>
+          <a href="login" class="get-started-btn scrollto">Log-in</a>
+          {% endif %}
         </div>
       </header>
           <!-- Breadcrumb -->

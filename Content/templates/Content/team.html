@@ -87,7 +87,12 @@
         {% if team %}
         {% for official in team %}
         <a href="profile?id={{official.id}}">
-          {{official.user.first_name}}
+          <div class="portfolio-details-container" style="border-bottom: 1px solid grey;">
+            <h3>{{ official.user.first_name }} {{ official.user.last_name }}</h3>
+            <h5>Department: {{ official.department }}</h5>
+            <h4>Rank: {{ official.rank }}</h4>
+            <h4>Special rights: {{ official.is_staff }}</h4>
+          </div>
         </a>
         {% endfor %}
         {% endif %}
