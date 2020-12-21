@@ -65,3 +65,9 @@ def reg(request):
 
 def finished_project(request):
     return render(request, 'Content/finished_project.html')
+
+def projects(request):
+    context = login_check(request)
+    context['projects'] = Project.objects.all()
+    context['photos'] = ProjectPhoto.objects.all()
+    return render(request, 'Content/projects.html', context)
