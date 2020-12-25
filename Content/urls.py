@@ -1,10 +1,12 @@
 from django.urls import path
 from .views import main, start, reg, logon, log_ex, \
     profile, project_make, finished_project, \
-        team, projects, project_view
+        team, projects, project_view, \
+            start_iter
 
 
 urlpatterns = [
+    path('', start_iter),
     path('start', start, name="start"),
     path('main', main, name="main"),
     path('auth', reg),

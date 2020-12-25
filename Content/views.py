@@ -9,6 +9,9 @@ from .views_cases import auth, login_check, handle_image, \
                         get_data_context_transfer, vote_for_project, \
                         project_view_context_data_preparation
 
+def start_iter(request):
+    return redirect('start')
+
 def team(request):
     context = context_data_preparing(request)
     context['team'] = Citizen.objects.all()
