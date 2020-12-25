@@ -14,7 +14,7 @@ SECRET_KEY = 'c*bj7os*u&-fq(d8c#b4!ztkvio=$pj)d9#p+%-mz2s8gtw&*s'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
